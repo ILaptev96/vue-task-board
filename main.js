@@ -5,7 +5,7 @@ Vue.component('task-category', {
         <div class="category-header">{{category.name}}</div>
             <div class="tasks">
                 <div v-for="task in filterTasks(tasks, category.id)">
-                {{task.name}}
+                <div>{{task.name}} - {{task.type}}</div>
                 </div>
             </div>
         </div>
@@ -40,19 +40,15 @@ var app = new Vue({
         },
         {
             name: "Task1",
-            type: "backlog"
+            type: "inprocess"
         },
         {
             name: "Task1",
-            type: "backlog"
+            type: "inprocess"
         },
         {
             name: "Task1",
-            type: "backlog"
-        },
-        {
-            name: "Task1",
-            type: "backlog"
+            type: "Done"
         },
         {
             name: "Task1",
@@ -69,6 +65,11 @@ var app = new Vue({
          this.tasks.push({name: "New task", type: "inprocess"})
         },
         addNewColumn: function(event) {
+
+            if(this.categoryName == '') {
+                alert('Enter name')
+                return
+            }
             this.countId++
             this.columns.push({name: this.categoryName, id: `category${this.countId}`})
             this.categoryName = ""
@@ -76,7 +77,4 @@ var app = new Vue({
     }
 })
 
-/*
-new Vue({
-    el: "#app"
-}); */
+ 
