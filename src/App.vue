@@ -17,9 +17,7 @@
       />
       <button class="btn btn-primary" v-on:click="addNewCategory">Add</button>
     </div>
-    <div id="task-detail">
-      
-    </div>
+    <div id="task-detail"></div>
   </div>
 </template>
 
@@ -28,58 +26,88 @@ import TaskCategory from "./components/TaskCategory.vue";
 
 export default {
   name: "App",
-  data: function() {
+  data: function () {
     return {
       categories: [
         { name: "backlog", id: "backlog" },
         { name: "In Process", id: "inprocess" },
-        { name: "Done", id: "Done" }
+        { name: "Done", id: "Done" },
       ],
       tasks: [
         {
-          name: "Task1",
-          type: "backlog"
+          name: "Dog",
+          author: "Tailer",
+          performer: "Alex",
+          complexity: 4,
+          deadline: "08.08.2021",
+          description: "This is the best description",
+          type: "backlog",
         },
         {
-          name: "Task1",
-          type: "backlog"
+          name: "Green",
+          author: "Tailer",
+          performer: "Alex",
+          complexity: 2,
+          deadline: "08.08.2021",
+          description: "This is the best description",
+          type: "backlog",
         },
         {
-          name: "Task1",
-          type: "inprocess"
+          name: "Yellow",
+          author: "Tailer",
+          performer: "Alex",
+          complexity: 10,
+          deadline: "08.08.2021",
+          description: "This is the best description",
+          type: "inprocess",
         },
         {
-          name: "Task1",
-          type: "inprocess"
+          name: "Red",
+          author: "Tailer",
+          performer: "Alex",
+          complexity: 7,
+          deadline: "08.08.2021",
+          description: "This is the best description",
+          type: "inprocess",
         },
         {
-          name: "Task1",
-          type: "Done"
+          name: "Blue",
+          author: "Tailer",
+          performer: "Alex",
+          complexity: 5,
+          deadline: "08.08.2021",
+          description: "This is the best description",
+          type: "Done",
         },
         {
-          name: "Task1",
-          type: "Done"
+          name: "Rat",
+          author: "Tailer",
+          performer: "Alex",
+          complexity: 8,
+          deadline: "08.08.2021",
+          description: "This is the best description",
+          type: "Done",
         },
         {
           name: "Test task",
-          type: "test"
-        }
+          type: "test",
+        },
       ],
       newCategoryName: "",
       categoryCounter: 0,
-      addNewCategory: function() {
+      addNewCategory: function () {
         this.categories.push({
           name: this.newCategoryName,
-          id: `category${this.categoryCounter}`
+          id: `category${this.categoryCounter}`,
         });
         this.categoryCounter++;
         this.newCategoryName = "";
-      }
+      },
     };
   },
   components: {
-    TaskCategory
-  }
+    TaskCategory,
+  },
 };
 </script>
 
@@ -94,10 +122,4 @@ export default {
 }
 </style>
 
-/*
-  (  )
-^ (00)
-|/(  )\
-| |  \
- 
- */
+
