@@ -1,7 +1,7 @@
 <template>
   <div class="col mb-4">
     <div class="card shadow-sm p-2">
-      <b class="category-header">{{category.name}}</b>
+      <b class="category-header mb-2">{{category.name}}</b>
       <div class="tasks">
         <Task v-bind:task="task" v-bind:key="task.name" v-for="task in filterTasks(tasks, category.id)"></Task>
       </div>

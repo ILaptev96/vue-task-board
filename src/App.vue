@@ -1,3 +1,4 @@
+
 <template>
   <div class="container">
     <div class="row mb-5">
@@ -35,13 +36,14 @@ export default {
       ],
       tasks: [
         {
-          name: "Dog",
+          name: "Purple",
           author: "Tailer",
           performer: "Alex",
           complexity: 4,
           deadline: "08.08.2021",
           description: "This is the best description",
           type: "backlog",
+          id: 5,
         },
         {
           name: "Green",
@@ -51,6 +53,7 @@ export default {
           deadline: "08.08.2021",
           description: "This is the best description",
           type: "backlog",
+          id: 4,
         },
         {
           name: "Yellow",
@@ -60,6 +63,7 @@ export default {
           deadline: "08.08.2021",
           description: "This is the best description",
           type: "inprocess",
+          id: 3,
         },
         {
           name: "Red",
@@ -69,6 +73,7 @@ export default {
           deadline: "08.08.2021",
           description: "This is the best description",
           type: "inprocess",
+          id: 2,
         },
         {
           name: "Blue",
@@ -78,19 +83,17 @@ export default {
           deadline: "08.08.2021",
           description: "This is the best description",
           type: "Done",
+          id: 1,
         },
         {
-          name: "Rat",
+          name: "Orange",
           author: "Tailer",
           performer: "Alex",
           complexity: 8,
           deadline: "08.08.2021",
           description: "This is the best description",
           type: "Done",
-        },
-        {
-          name: "Test task",
-          type: "test",
+          id: 0,
         },
       ],
       newCategoryName: "",
@@ -102,7 +105,7 @@ export default {
         });
         this.categoryCounter++;
         this.newCategoryName = "";
-      },
+      } 
     };
   },
   components: {
