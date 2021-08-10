@@ -105,8 +105,14 @@ export default {
         });
         this.categoryCounter++;
         this.newCategoryName = "";
-      } 
+      }
     };
+  },
+  provide: function () {
+    return {
+      tasks: this.tasks,
+      categories: this.categories
+    }
   },
   components: {
     TaskCategory,

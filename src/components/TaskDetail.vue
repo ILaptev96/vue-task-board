@@ -3,22 +3,22 @@
       <div class="modal-dialog">
         <div class="modal-content" v-show="!edit">
           <div class="modal-header">
-            <h5 class="modal-title fw-bold" id="modalTaskLabel">{{task.name}} <span class="fs-6 text-secondary fw-light">- [Author: {{task.author}}]</span></h5>
+            <h5 class="modal-title fw-bold" id="modalTaskLabel">{{taskData.name}} <span class="fs-6 text-secondary fw-light">- [Author: {{taskData.author}}]</span></h5>
             <button type="button" class="btn ms-1" @click="nextStep"><i class="fas fa-edit"></i></button>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="closeModal"></button>
-          </div>  
+          </div>
           <div class="modal-body" style="text-align: left;">
                 <div class="input-group mb-1">
                     <span class="input-group-text border-0"><i class="fas fa-user-cog"></i></span>
-                    <input type="text" class="form-control border-0 ps-0" :value="task.performer" disabled>
-                </div>  
+                    <input type="text" class="form-control border-0 ps-0" :value="taskData.performer" disabled>
+                </div>
                 <ul class="list-group list-group-flush mb-2">
-                    <li class="list-group-item list-group-item d-flex justify-content-between align-items-center">Deadline: <span>{{task.deadline}}</span></li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">Complexity: <span>{{task.complexity}}/10</span></li>
-                    <li class="list-group-item list-group-item d-flex justify-content-between align-items-center border-bottom">type: <span>{{task.type}}</span></li>
+                    <li class="list-group-item list-group-item d-flex justify-content-between align-items-center">Deadline: <span>{{taskData.deadline}}</span></li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">Complexity: <span>{{taskData.complexity}}/10</span></li>
+                    <li class="list-group-item list-group-item d-flex justify-content-between align-items-center border-bottom">type: <span>{{taskData.type}}</span></li>
                 </ul>
                 <p class="ps-3 h6">
-                    {{task.description}}
+                    {{taskData.description}}
                 </p>
           </div>
           <div class="modal-footer">
@@ -27,12 +27,12 @@
         </div>
         <div class="modal-content" v-show="edit">
           <div class="modal-header">
-            <h5 class="modal-title fw-bold" id="modalTaskLabel">Task edit: {{task.name}}</h5>
+            <h5 class="modal-title fw-bold" id="modalTaskLabel">Task edit: {{taskData.name}}</h5>
             <button type="button" class="btn ms-1" @click="nextStep"><i class="fas fa-file-alt"></i></button>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="closeModal"></button>
-          </div>  
-                      <form @submit.prevent="onSubmit">  
-           <div class="modal-body" style="text-align: left;" v-show="edit">   
+          </div>
+                      <form @submit.prevent="onSubmit">
+           <div class="modal-body" style="text-align: left;" v-show="edit">
               <div class="mb-3">
                     <label for="Task" class="form-label">Task name</label>
                     <input type="text" v-model="name" class="form-control" id="Task"  >
@@ -63,10 +63,10 @@
         </div>
       </div>
     </div>
- 
+
 
 </template>
-    
+
 
 <script>
 export default {
@@ -74,9 +74,15 @@ export default {
   props: ["task", "edit"],
   data() {
     return {
-      name: this.task.name,
-      performer: this.task.performer,
+      // name: this.taskData.name,
+      // performer: this.taskData.performer
     };
+  },
+  inject: ["tasks", "categories"],
+  created() {
+    console.log(this.task)
+    console.log(this.tasks)
+    console.log(this.taskData)
   },
   methods: {
     closeModal() {
@@ -86,24 +92,29 @@ export default {
       this.$emit("nextStep");
     },
     onSubmit() {
-      /* 
+      /*
       this.$emit("nextStep");
       console.log("onSubmit");
       const newTask = {
         name: this.name,
-        taskId: this.task.id,
+        taskId: this.taskData.id,
       };
       this.$emit("created", newTask);
        */
-      //this.task.splice(1, 0, "February");
+      //this.taskData.splice(1, 0, "February");
 
       //Если попытаться изменить массив выходит ошибка
       //По логике метод для редактирования и изменения массива должден быть в App.vue, но как его вызвать отсюда?
       //this.$emit(""); Не помогает т.к там 3 компонента подряд
 
-     this.task.name = this.name
+     this.taskData.name = this.name
     },
   },
+  computed: {
+    taskData: function () {
+      return this.tasks.find(el => el.id == this.task.id);
+    }
+  }
 };
 </script>
 
