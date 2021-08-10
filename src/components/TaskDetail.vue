@@ -34,12 +34,12 @@
                       <form @submit.prevent="onSubmit">  
            <div class="modal-body" style="text-align: left;" v-show="edit">   
               <div class="mb-3">
-                    <label for="Task" class="form-label">Task</label>
-                    <input type="text" v-model="inputTask" class="form-control" id="Task"  >
+                    <label for="Task" class="form-label">Task name</label>
+                    <input type="text" v-model="name" class="form-control" id="Task"  >
                 </div>
               <div class="mb-3">
                     <label for="performer" class="form-label">Performer</label>
-                    <input type="text" class="form-control" id="performer">
+                    <input type="text" v-model="performer" class="form-control" id="performer">
                 </div>
               <div class="mb-3">
                     <label for="Complexity" class="form-label">Complexity</label>
@@ -74,7 +74,8 @@ export default {
   props: ["task", "edit"],
   data() {
     return {
-      inputTask: this.task.name,
+      name: this.task.name,
+      performer: this.task.performer,
     };
   },
   methods: {
@@ -85,15 +86,22 @@ export default {
       this.$emit("nextStep");
     },
     onSubmit() {
-/*       this.$emit("nextStep");
+      /* 
+      this.$emit("nextStep");
       console.log("onSubmit");
       const newTask = {
-        name: this.inputTask,
+        name: this.name,
         taskId: this.task.id,
       };
-      this.$emit("created", newTask); */
+      this.$emit("created", newTask);
+       */
+      //this.task.splice(1, 0, "February");
 
-      //  this.task.splice(1, 0, "February");
+      //Если попытаться изменить массив выходит ошибка
+      //По логике метод для редактирования и изменения массива должден быть в App.vue, но как его вызвать отсюда?
+      //this.$emit(""); Не помогает т.к там 3 компонента подряд
+
+     this.task.name = this.name
     },
   },
 };
