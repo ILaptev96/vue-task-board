@@ -31,7 +31,7 @@
             <button type="button" class="btn ms-1" @click="nextStep"><i class="fas fa-file-alt"></i></button>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="closeModal"></button>
           </div>
-                      <form @submit.prevent="onSubmit">
+          <form @submit.prevent="onSubmit">
            <div class="modal-body" style="text-align: left;" v-show="edit">
               <div class="mb-3">
                     <label for="Task" class="form-label">Task name</label>
@@ -43,15 +43,15 @@
                 </div>
               <div class="mb-3">
                     <label for="Complexity" class="form-label">Complexity</label>
-                    <input type="text" class="form-control" id="Complexity">
+                    <input type="number" v-model="complexity" class="form-control" id="Complexity">
                 </div>
               <div class="mb-3">
                     <label for="Deadline" class="form-label">Deadline</label>
-                    <input type="date" class="form-control" id="Deadline">
+                    <input type="date" v-model="deadline" class="form-control" id="Deadline">
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <textarea class="form-control bg-light border-0" id="description" rows="2"></textarea>
+                    <textarea v-model="description" class="form-control bg-light border-0" id="description" rows="2"></textarea>
                 </div>
 
               </div>
@@ -72,17 +72,21 @@
 export default {
   name: "TaskDetail",
   props: ["task", "edit"],
+  inject: ["tasks", "categories"],
   data() {
     return {
-      // name: this.taskData.name,
-      // performer: this.taskData.performer
+      name: this.task.name,
+      performer: this.task.performer,
+      complexity: this.task.complexity,
+      deadline: this.task.deadline,
+      description: this.task.description,
     };
   },
-  inject: ["tasks", "categories"],
   created() {
-    console.log(this.task)
+     
+/*     console.log(this.task)
     console.log(this.tasks)
-    console.log(this.taskData)
+    console.log(this.taskData) */
   },
   methods: {
     closeModal() {
@@ -91,23 +95,15 @@ export default {
     nextStep() {
       this.$emit("nextStep");
     },
-    onSubmit() {
-      /*
-      this.$emit("nextStep");
-      console.log("onSubmit");
-      const newTask = {
-        name: this.name,
-        taskId: this.taskData.id,
-      };
-      this.$emit("created", newTask);
-       */
-      //this.taskData.splice(1, 0, "February");
-
-      //Если попытаться изменить массив выходит ошибка
-      //По логике метод для редактирования и изменения массива должден быть в App.vue, но как его вызвать отсюда?
-      //this.$emit(""); Не помогает т.к там 3 компонента подряд
-
+    onSubmit() {    
      this.taskData.name = this.name
+     this.taskData.performer = this.performer
+     this.taskData.complexity = this.complexity
+     this.taskData.deadline = this.deadline
+     this.taskData.description = this.description 
+    
+     this.$emit("nextStep");
+     this.$emit("closeModal");
     },
   },
   computed: {
@@ -118,22 +114,3 @@ export default {
 };
 </script>
 
-<style>
-.popup-bg {
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: black;
-}
-
-.popup {
-    width: 70%;
-    height: 60%;
-    background: #fff;
-}
-</style>

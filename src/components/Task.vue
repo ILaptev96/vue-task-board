@@ -1,13 +1,4 @@
 <template>
-  <!--   <div v-on:click="showDetailInfo" v-if="task.complexity<=5" class="bg-success text-white p-2 mb-2" style="--bs-bg-opacity: .9;">
-    <div>{{ task.name }}</div>
-  </div>
-  <div v-on:click="showDetailInfo" v-else-if="task.complexity>=5&&task.complexity<=8" class="bg-warning text-white p-2 mb-2" style="--bs-bg-opacity: .9;">
-    <div>{{ task.name }}</div>
-  </div>
-  <div v-on:click="showDetailInfo" v-else class="bg-danger p-2 mb-2 text-white" style="--bs-bg-opacity: .9;">
-    <div>{{ task.name }}</div>
-  </div> -->
   <div
     v-on:click="showDetailInfo"
     class="bg-warning p-2 mb-2"
@@ -17,7 +8,7 @@
   </div>
   <TaskDetail
     @nextStep="stepEdit"
-    @closeModal="hideDetail"
+    @closeModal="hideDetailInfo"
     :edit="edit"
     :task="task"
     v-if="showDetail"
@@ -36,16 +27,14 @@ export default {
         "fade modal-backdrop show";
       this.showDetail = true;
     },
-    hideDetail() {
+    hideDetailInfo() {
+      console.log('this.showDetail',this.showDetail)
       document.getElementById("modal-backdrop").className = "";
       this.showDetail = false;
     },
     stepEdit() {  
       this.edit ? (this.edit = !1) : (this.edit = !0);
     },
-/*     editTask() {
-     console.log( this.task)
-    } */
   },
   components: {
     TaskDetail,
@@ -54,7 +43,6 @@ export default {
     return {
       showDetail: false,
       edit: false,
-      inputTask: "",
     };
   },
 };
