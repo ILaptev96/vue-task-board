@@ -4,19 +4,13 @@
     <div class="row mb-5">
       <TaskCategory
         v-bind:key="category.id"
-        v-bind:tasks="tasks"
         v-bind:category="category"
         v-for="category in categories"
       ></TaskCategory>
     </div>
     <div class="col-5 d-flex">
-      <input
-        class="form-control me-3"
-        type="text"
-        v-model="newCategoryName"
-        placeholder="Column name"
-      />
-      <button class="btn btn-primary" v-on:click="addNewCategory">Add</button>
+      <input class="form-control me-3" type="text" v-model="categoryName" placeholder="Column name" />
+      <button class="btn btn-primary" v-on:click="addColumns">Add</button>
     </div>
     <div id="task-detail"></div>
   </div>
@@ -27,12 +21,18 @@ import TaskCategory from "./components/TaskCategory.vue";
 
 export default {
   name: "App",
-  data: function () {
+  props: {
+    /*     inputCategoryName: {
+      type: string,
+      require: true
+    } */
+  },
+  data: function() {
     return {
       categories: [
         { name: "backlog", id: "backlog" },
         { name: "In Process", id: "inprocess" },
-        { name: "Done", id: "Done" },
+        { name: "Done", id: "Done" }
       ],
       tasks: [
         {
@@ -43,7 +43,7 @@ export default {
           deadline: "2021-08-10",
           description: "This is the best description",
           type: "backlog",
-          id: 5,
+          id: 5
         },
         {
           name: "Green",
@@ -53,7 +53,7 @@ export default {
           deadline: "2021-08-10",
           description: "This is the best description",
           type: "backlog",
-          id: 4,
+          id: 4
         },
         {
           name: "Yellow",
@@ -63,7 +63,7 @@ export default {
           deadline: "2021-08-10",
           description: "This is the best description",
           type: "inprocess",
-          id: 3,
+          id: 3
         },
         {
           name: "Red",
@@ -73,7 +73,7 @@ export default {
           deadline: "2021-08-10",
           description: "This is the best description",
           type: "inprocess",
-          id: 2,
+          id: 2
         },
         {
           name: "Blue",
@@ -83,7 +83,7 @@ export default {
           deadline: "2021-08-10",
           description: "This is the best description",
           type: "Done",
-          id: 1,
+          id: 1
         },
         {
           name: "Orange",
@@ -93,30 +93,34 @@ export default {
           deadline: "2021-08-10",
           description: "This is the best description",
           type: "Done",
-          id: 0,
-        },
+          id: 0
+        }
       ],
-      newCategoryName: "",
-      categoryCounter: 0,
-      addNewCategory: function () {
-        this.categories.push({
-          name: this.newCategoryName,
-          id: `category${this.categoryCounter}`,
-        });
-        this.categoryCounter++;
-        this.newCategoryName = "";
-      }
+      categoryName: "",
+      categoryCounter: 0
     };
   },
-  provide: function () {
+  provide: function() {
     return {
       tasks: this.tasks,
       categories: this.categories
-    }
+    };
   },
   components: {
-    TaskCategory,
+    TaskCategory
   },
+  methods: {
+    addColumns: function() {
+      if (this.categoryName != "") {
+        this.categories.push({
+          name: this.categoryName,
+          id: this.categoryCounter
+        });
+        this.categoryCounter++;
+        this.categoryName = "";
+      }
+    }
+  }
 };
 </script>
 

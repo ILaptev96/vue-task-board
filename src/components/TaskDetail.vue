@@ -3,7 +3,7 @@
       <div class="modal-dialog">
         <div class="modal-content" v-show="!edit">
           <div class="modal-header">
-            <h5 class="modal-title fw-bold" id="modalTaskLabel">{{taskData.name}} <span class="fs-6 text-secondary fw-light">- [Author: {{taskData.author}}]</span></h5>
+            <h5 class="modal-title fw-bold" id="modalTaskLabel">{{taskData.name}}</h5>
             <button type="button" class="btn ms-1" @click="nextStep"><i class="fas fa-edit"></i></button>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="closeModal"></button>
           </div>
@@ -12,11 +12,21 @@
                     <span class="input-group-text border-0"><i class="fas fa-user-cog"></i></span>
                     <input type="text" class="form-control border-0 ps-0" :value="taskData.performer" disabled>
                 </div>
-                <ul class="list-group list-group-flush mb-2">
-                    <li class="list-group-item list-group-item d-flex justify-content-between align-items-center">Deadline: <span>{{taskData.deadline}}</span></li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">Complexity: <span>{{taskData.complexity}}/10</span></li>
-                    <li class="list-group-item list-group-item d-flex justify-content-between align-items-center border-bottom">type: <span>{{taskData.type}}</span></li>
-                </ul>
+                <div class="row">
+                  <div class="col-lg-6 ol-12">
+                    <ul class="list-group list-group-flush mb-2">
+                        <li class="list-group-item list-group-item d-flex justify-content-between align-items-center">Performer: <span>{{taskData.performer}}</span></li>
+                        <li class="list-group-item list-group-item d-flex justify-content-between align-items-center">Author: <span>{{taskData.author}}</span></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">Complexity: <span>{{taskData.complexity}}/10</span></li>
+                    </ul>   
+                  </div>    
+                  <div class="col-lg-6 ol-12">        
+                    <ul class="list-group list-group-flush mb-2">
+                        <li class="list-group-item list-group-item d-flex justify-content-between align-items-center">Deadline: <span>{{taskData.deadline}}</span></li>
+                        <li class="list-group-item list-group-item d-flex justify-content-between align-items-center border-bottom">type: <span>{{taskData.type}}</span></li>
+                  </ul>
+                  </div> 
+                </div>
                 <p class="ps-3 h6">
                     {{taskData.description}}
                 </p>

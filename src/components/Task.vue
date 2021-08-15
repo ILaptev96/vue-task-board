@@ -14,6 +14,7 @@
     v-if="showDetail"
   >
   </TaskDetail>
+  
 </template>
 
 <script>
@@ -28,7 +29,6 @@ export default {
       this.showDetail = true;
     },
     hideDetailInfo() {
-      console.log('this.showDetail',this.showDetail)
       document.getElementById("modal-backdrop").className = "";
       this.showDetail = false;
     },
