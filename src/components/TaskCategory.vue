@@ -9,9 +9,16 @@
           v-for="task in filterTasks(tasks, category.id)"
         ></Task>
       </div>
-      <div class="d-flex">
-        <input class="form-control me-3" type="text" v-model="taskName" placeholder="Task Name" />
+      <div class="row">
+        <div class="col-4">
+        <select class="form-select" v-model="taskType">
+          <option v-for="taskType in taskTypes" v-bind:value="taskType.code" v-bind:key="taskType.code">{{taskType.name}}</option>
+        </select>
+        </div>
+        <div class="d-flex col-8">
+        <input class="form-control me-2" type="text" v-model="taskName" placeholder="Task Name" />
         <button class="btn btn-primary" @click="addTask">Add</button>
+        </div>
       </div>
     </div>
   </div>
@@ -22,7 +29,7 @@ import Task from "./Task.vue";
 
 export default {
   name: "TaskCategory",
-  props: ["category"],
+  props: ["category", "taskTypes"],
   inject: ["tasks"],
   data() {
     return {
@@ -32,7 +39,7 @@ export default {
   methods: {
     filterTasks: function(aTasks, sType) {
       return aTasks.filter(function(el) {
-        return el.type === sType;
+        return el.category === sType;
       });
     },
     addTask: function() {
@@ -43,7 +50,8 @@ export default {
           performer: "",
           deadline: new Date().toISOString().split('T')[0],
           description: "",
-          type: this.category.id
+          category: this.category.id,
+          type: this.taskType
         });
         this.taskName = "";
         console.log(this.tasks);

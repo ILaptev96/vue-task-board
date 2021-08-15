@@ -5,6 +5,7 @@
       <TaskCategory
         v-bind:key="category.id"
         v-bind:category="category"
+        v-bind:taskTypes="taskTypes"
         v-for="category in categories"
       ></TaskCategory>
     </div>
@@ -29,6 +30,16 @@ export default {
   },
   data: function() {
     return {
+       taskTypes: [{
+        name: "Новая функциональность",
+        code: "feat"
+      }, {
+        name: "Дефект",
+        code: "defect"
+      }, {
+        name: "Технический долг",
+        code: "tech"
+      }],
       categories: [
         { name: "backlog", id: "backlog" },
         { name: "In Process", id: "inprocess" },
@@ -42,7 +53,8 @@ export default {
           complexity: 4,
           deadline: "2021-08-10",
           description: "This is the best description",
-          type: "backlog",
+          category: "backlog",
+          type: "",
           id: 5
         },
         {
@@ -52,7 +64,8 @@ export default {
           complexity: 2,
           deadline: "2021-08-10",
           description: "This is the best description",
-          type: "backlog",
+          category: "backlog",
+          type: "",
           id: 4
         },
         {
@@ -62,7 +75,8 @@ export default {
           complexity: 10,
           deadline: "2021-08-10",
           description: "This is the best description",
-          type: "inprocess",
+          category: "inprocess",
+          type: "",
           id: 3
         },
         {
@@ -72,7 +86,8 @@ export default {
           complexity: 7,
           deadline: "2021-08-10",
           description: "This is the best description",
-          type: "inprocess",
+          category: "inprocess",
+          type: "",
           id: 2
         },
         {
@@ -82,7 +97,8 @@ export default {
           complexity: 5,
           deadline: "2021-08-10",
           description: "This is the best description",
-          type: "Done",
+          category: "Done",
+          type: "",
           id: 1
         },
         {
@@ -92,7 +108,8 @@ export default {
           complexity: 8,
           deadline: "2021-08-10",
           description: "This is the best description",
-          type: "Done",
+          category: "Done",
+          type: "",
           id: 0
         }
       ],
